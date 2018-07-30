@@ -1,0 +1,14 @@
+{
+    "name": "russellfair/wp_plugin_example",
+    "description": "An Example of a WordPress plugin with standards, linting, tests and CI/CD",
+    "authors": [
+        {
+            "name": "Russell Fair",
+            "email": "rfair404@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    }
+}
