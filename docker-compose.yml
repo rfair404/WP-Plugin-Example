@@ -2,8 +2,11 @@ version: '3.3'
 
 services:
    db:
+     container_name: wpdb
      image: mysql:5.7
      restart: always
+     ports:
+       - 3306:3306
      environment:
        MYSQL_ROOT_PASSWORD: somewordpress
        MYSQL_DATABASE: wordpress
@@ -11,7 +14,10 @@ services:
        MYSQL_PASSWORD: wordpress
 
    wordpress:
+     container_name: wp
      depends_on:
+       - db
+     links:
        - db
      image: wordpress:latest
      ports:
@@ -23,4 +29,11 @@ services:
        WORDPRESS_DB_PASSWORD: wordpress
      volumes:
        - ./vendor:/var/www/html/vendor/
+       - ./phpunit.xml.dist:/var/www/html/phpunit.xml.dist
+       - ./phpunit-bootstrap.php:/var/www/html/phpunit-bootstrap.php
+       - ./phpcs.xml:/var/www/html/phpcs.xml
+       - ./phpmd-ruleset.xml:/var/www/html/phpmd-ruleset.xml
+#       - ./wp-config.php:/var/www/html/wp-config.php
+
+
 

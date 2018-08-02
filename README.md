@@ -1,6 +1,6 @@
-# Example of a WordPress Plugin that follows a TDD approach, includes the WordPress coding standards, PHPMD, and uses CI/CD for automated deployments.
+Example of a WordPress Plugin that follows a TDD approach, includes the WordPress coding standards, PHPMD, and uses CI/CD for automated deployments.
 
-Objectives:
+### Objectives:
 
 * PHP_Codesniffer
 * WordPress Coding Standards
@@ -11,3 +11,7 @@ Objectives:
 * Qunit
 * Continuous Integration (TravisCI)
 * Continuous Deployment (host TBD)
+
+### Installing
+
+Install WP Unit Test Suite by running `$ sh bin/install-wp-tests.sh`
