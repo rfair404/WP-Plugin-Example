@@ -20,7 +20,7 @@
 
 define('WP_SITEURL', 'http://localhost');
 define('WP_HOME', 'http://localhost/wp');
-define( 'WP_CONTENT_DIR', __DIR__ . '/custom-content/' );
+define('WP_CONTENT_DIR', __DIR__ . '/custom-content/' );
 define('WP_CONTENT_URL', 'http://localhost/custom-content/');
 
 

@@ -38,7 +38,7 @@ services:
        - ./phpmd-ruleset.xml:/var/www/html/phpmd-ruleset.xml
        - ./install-wp-tests.sh:/var/www/html/install-wp-tests.sh
        - ./docroot/wp-config.php:/var/www/html/docroot/wp-config.php
-       - ./custom-content:/var/www/html/docroot/custom-content
+       - ./custom-content:/var/www/html/docroot/custom-content/
 
 
 

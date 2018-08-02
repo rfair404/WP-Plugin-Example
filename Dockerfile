@@ -3,7 +3,7 @@ FROM alpine:3.7
 # Install packages
 RUN apk --no-cache add php7 php7-fpm php7-mysqli php7-json php7-openssl php7-tokenizer php7-curl \
     php7-zlib php7-xml php7-simplexml php7-xmlwriter php7-phar php7-intl php7-dom php7-xmlreader php7-ctype \
-    php7-mbstring php7-gd php7-bz2 nginx supervisor curl git mysql mysql-client
+    php7-mbstring php7-gd php7-bz2 nginx supervisor curl git mysql mysql-client bash subversion
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
@@ -42,8 +42,6 @@ RUN set -ex; \
 COPY ./docroot/wp-config.php /var/www/html/docroot/wp-config.php
 
 COPY ./custom-content /var/www/html/docroot/custom-content
-
-WORKDIR /var/www/html/docroot
 
 EXPOSE 80 443
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
