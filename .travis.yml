@@ -48,7 +48,7 @@ install:
 #    - source $DEV_LIB_PATH/travis.install.sh
 
 script:
-    - source $DEV_LIB_PATH/travis.script.sh
+#    - source $DEV_LIB_PATH/travis.script.sh
 #    - if [ -e ./vendor/bin/phpmd ]; then ./vendor/bin/phpmd docroot/wp-content/plugins/beachbody-on-demand/src text docroot/wp-content/plugins/beachbody-on-demand/phpmd-ruleset.xml --exclude vendor --suffixes php; fi
 
 after_script:
