@@ -11,7 +11,7 @@
         "johnpbloch/wordpress": "4.9.7"
     },
     "extra": {
-        "wordpress-install-dir": "wp"
+        "wordpress-install-dir": "docroot/wp"
     },
     "require-dev": {
         "phpunit/phpunit": "^7",
