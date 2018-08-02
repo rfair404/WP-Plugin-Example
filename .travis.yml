@@ -43,14 +43,14 @@ branches:
         - /^release\/.*$/
 
 before_install:
-    - apt-get update -yqq
-    - apt-get install git -yqq
-    - apt-get -yqqf install curl vim wget zip unzip rsync subversion gcc g++ make mysql-client libmcrypt-dev libmysqlclient-dev libpng-dev  --fix-missing
+    - sudo apt-get update -yqq
+    - sudo apt-get install git -yqq
+    - sudo apt-get -yqqf install curl vim wget zip unzip rsync subversion gcc g++ make mysql-client libmcrypt-dev libmysqlclient-dev libpng-dev  --fix-missing
     - curl -sL https://deb.nodesource.com/setup_8.x | bash
     - curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
     - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-    - apt-get update -yqq
-    - apt-get -yqqf install nodejs yarn
+    - sudo apt-get update -yqq
+    - sudo apt-get -yqqf install nodejs yarn
     # Install PHP extensions
     - docker-php-ext-install mysqli pdo_mysql mbstring
     # Install & enable Xdebug for code coverage reports
