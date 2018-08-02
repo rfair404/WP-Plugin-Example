@@ -38,20 +38,29 @@ branches:
         - /^release\/.*$/
 
 before_install:
-#    - WP_VERSION=$( cat ./config/wp-version )
-#    - echo "WP_VERSION=$WP_VERSION"
+    - apt-get update -yqq
+    - apt-get install git -yqq
+    - apt-get -yqqf install curl vim wget zip unzip rsync subversion gcc g++ make mysql-client libmcrypt-dev libmysqlclient-dev libpng-dev  --fix-missing
+    - curl -sL https://deb.nodesource.com/setup_8.x | bash
+    - curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+    - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+    - apt-get update -yqq
+    - apt-get -yqqf install nodejs yarn
+    # Install PHP extensions
+    - docker-php-ext-install mysqli pdo_mysql mbstring
+    # Install & enable Xdebug for code coverage reports
+    - pecl install xdebug
+    - docker-php-ext-enable mysqli pdo_mysql mbstring xdebug
+    # Install and run Composer
+    - curl -sS https://getcomposer.org/installer | php
+    - php composer.phar install
+    # Install WP Unit testing suite
+    - bash install-wp-tests.sh wp_test root mysql mysql latest true
 
 install:
-#    - export DEV_LIB_PATH=dev-lib
-#    - if [ ! -e "$DEV_LIB_PATH" ] && [ -L .travis.yml ]; then export DEV_LIB_PATH=$( dirname $( readlink .travis.yml ) ); fi
-#    - if [ ! -e "$DEV_LIB_PATH" ]; then git clone https://github.com/xwp/wp-dev-lib.git $DEV_LIB_PATH; fi
-#    - source $DEV_LIB_PATH/travis.install.sh
     - source install-wp-tests.sh
 
 script:
-#    - source $DEV_LIB_PATH/travis.script.sh
-#    - if [ -e ./vendor/bin/phpmd ]; then ./vendor/bin/phpmd docroot/wp-content/plugins/beachbody-on-demand/src text docroot/wp-content/plugins/beachbody-on-demand/phpmd-ruleset.xml --exclude vendor --suffixes php; fi
 
 after_script:
-#    - source $DEV_LIB_PATH/travis.after_script.sh
 sftp -o Port=2222 $USER@$HOST
