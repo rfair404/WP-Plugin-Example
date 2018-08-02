@@ -5,11 +5,11 @@ Example of a WordPress Plugin that follows a TDD approach, includes the WordPres
 * PHP_Codesniffer
 * WordPress Coding Standards
 * PHPMD
-* eslint
-* stylelint
+* eslint (missing)
+* stylelint (missing)
 * PHP_Unit
-* WP_Mock
-* Qunit
+* WP_Mock (missing)
+* Qunit (missing)
 * Continuous Integration (TravisCI)
 * Continuous Deployment (host TBD)
 
@@ -32,7 +32,7 @@ docker exec -it wp /bin/bash install-wp-tests.sh wordpress_tests root somewordpr
 ```
 If the test suite has been installed, and the test database created, run this instead:
 ``````
-docker exec -it wp /bin/bash install-wp-tests.sh wordpress_tests root somewordpress db latest false
+docker exec -it wp /bin/bash install-wp-tests.sh wordpress_tests root somewordpress db latest true
 ```
 
 Configure PHPCS to use WPCS  by running 
