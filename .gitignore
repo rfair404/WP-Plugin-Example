@@ -1,5 +1,6 @@
 vendor/*
 wp/
 composer.lock
+docroot/custom-content
 
 .idea

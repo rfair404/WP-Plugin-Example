@@ -38,16 +38,10 @@ WORKDIR /var/www/html
 RUN set -ex; \
     composer install
 
-COPY ./docroot/index.php /var/www/html/docroot/index.php
+#COPY ./docroot/index.php /var/www/html/docroot/index.php
 COPY ./docroot/wp-config.php /var/www/html/docroot/wp-config.php
 
-#COPY ./wp-content/plugins /var/www/html/wordpress/wp-content/plugins
-#COPY ./wp-content/bb-base /var/www/html/wordpress/wp-content/bb-base
-#COPY ./wp-content/themes /var/www/html/wordpress/wp-content/themes
-
-#WORKDIR /var/www/html/wordpress/wp-content/themes/BeachbodyBlog
-#RUN set -ex; \
-#    composer install
+COPY ./custom-content /var/www/html/docroot/custom-content
 
 WORKDIR /var/www/html/docroot
 
