@@ -63,4 +63,4 @@ install:
 script:
 
 after_script:
-sftp -o Port=2222 $USER@$HOST
+    - sftp -o Port=2222 $USER@$HOST
