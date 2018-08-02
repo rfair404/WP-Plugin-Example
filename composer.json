@@ -15,7 +15,7 @@
     ],
     "require": {
         "johnpbloch/wordpress": "4.9.7",
-        "wpackagist-theme/twentyseventeen": ""
+        "wpackagist-theme/twentyseventeen": "1.6"
     },
     "extra": {
         "wordpress-install-dir": "docroot",

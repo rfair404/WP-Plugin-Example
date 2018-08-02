@@ -1,5 +1,5 @@
 <?php
-define( 'WP_CONTENT_DIR', __DIR__ . '/public_html/custom-content/' );
+define( 'WP_CONTENT_DIR', __DIR__ . '/custom-content/' );
 define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . 'plugins/' );
 define( 'WP_MU_PLUGIN_DIR', WP_CONTENT_DIR . 'mu-plugins/' );
 

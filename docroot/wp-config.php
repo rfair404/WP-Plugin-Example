@@ -18,8 +18,11 @@
  * @package WordPress
  */
 
-define('WP_SITEURL', 'http://localhost:8000');
-define('WP_HOME', 'http://localhost:8000/wp');
+define('WP_SITEURL', 'http://localhost');
+define('WP_HOME', 'http://localhost/wp');
+define( 'WP_CONTENT_DIR', __DIR__ . '/custom-content/' );
+define('WP_CONTENT_URL', 'http://localhost/custom-content/');
+
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
