@@ -1,5 +1,5 @@
 <?php
-define( 'WP_CONTENT_DIR', __DIR__ . '/custom-content/' );
+define( 'WP_CONTENT_DIR', __DIR__ . '/docroot/custom-content/' );
 define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . 'plugins/' );
 define( 'WP_MU_PLUGIN_DIR', WP_CONTENT_DIR . 'mu-plugins/' );
 
@@ -26,8 +26,7 @@ require_once 'vendor/autoload.php';
 
 // Manually Load each plugin to be tested.
 function _manually_load_plugin() {
-    require_once WP_PLUGIN_DIR . '/path/plugin.php';
-//    require_once WP_MU_PLUGIN_DIR . '/mu-plugin.php';
+    require_once WP_PLUGIN_DIR . 'custom-plugin/custom-plugin.php';
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 
