@@ -7,11 +7,22 @@
             "email": "rfair404@gmail.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        }
+    ],
     "require": {
-        "johnpbloch/wordpress": "4.9.7"
+        "johnpbloch/wordpress": "4.9.7",
+        "wpackagist-theme/twentyseventeen": ""
     },
     "extra": {
-        "wordpress-install-dir": "docroot/wp"
+        "wordpress-install-dir": "docroot",
+        "installer-paths": {
+            "docroot/custom-content/plugins/{$name}/": ["type:wordpress-plugin"],
+            "docroot/custom-content/themes/{$name}/": ["type:wordpress-theme"]
+        }
     },
     "require-dev": {
         "phpunit/phpunit": "^7",
