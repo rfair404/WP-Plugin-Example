@@ -1,4 +1,4 @@
-sudo: false
+sudo: true
 
 cache:
   directories:
@@ -9,6 +9,11 @@ cache:
 language:
     - php
     - node_js
+
+# Bring in any services we need http://docs.gitlab.com/ee/ci/docker/using_docker_images.html#what-is-a-service
+# See http://docs.gitlab.com/ce/ci/services/README.html for examples.
+services:
+  - mysql:5.7
 
 php:
     - 7.0
