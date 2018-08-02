@@ -1,100 +1,55 @@
-# This file is a template, and might need editing before it works on your project.
-# Mostly taken from https://w3guy.com/automated-wordpress-phpunit-test-gitlab-ci/
-# Select image from https://hub.docker.com/_/php/
-image: php:7.1.3
+sudo: false
 
-# Select what we should cache between builds
 cache:
-  paths:
-  - vendor/
+  directories:
+    - node_modules
+    - vendor
+#    - $HOME/phpunit-bin
 
-before_script:
-- apt-get update -yqq
-- apt-get install git -yqq
-- apt-get -yqqf install curl vim wget zip unzip rsync subversion gcc g++ make mysql-client libmcrypt-dev libmysqlclient-dev libpng-dev  --fix-missing
-- curl -sL https://deb.nodesource.com/setup_8.x | bash
-- curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-- echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-- apt-get update -yqq
-- apt-get -yqqf install nodejs yarn
-# Install PHP extensions
-- docker-php-ext-install mysqli pdo_mysql mbstring
-# Install & enable Xdebug for code coverage reports
-- pecl install xdebug
-- docker-php-ext-enable mysqli pdo_mysql mbstring xdebug
-# Install and run Composer
-- curl -sS https://getcomposer.org/installer | php
-- php composer.phar install
-# Install WP Unit testing suite
-#- bash bin/install-wp-tests.sh wp_test root mysql mysql $WP_VERSION true
-# Composer install the custom plugin(s)
-- cd public_html/custom-content/plugins/gpi && php ../../../../composer.phar install
-# Install Grunt and other NPM dependencies
-- npm install
-- cd ../../mu-plugins/gpi-plugin-loader && php ../../../../composer.phar install
-- cd ../../../..
-- cd public_html/custom-content/themes/gpi-theme
-- yarn install
-- cd ../../../..
+language:
+    - php
+    - node_js
 
+php:
+    - 7.0
 
-# Bring in any services we need http://docs.gitlab.com/ee/ci/docker/using_docker_images.html#what-is-a-service
-# See http://docs.gitlab.com/ce/ci/services/README.html for examples.
-services:
-  - mysql:5.7
+matrix:
+  fast_finish: true
+  include:
+    # Run PHPCS against WPCS. I just picked to run it against 7.0.
+#    - php: 7.0
+#      env: PHPCS_BRANCH=master SNIFF=1
+#      addons:
+#        apt:
+#          packages:
+#            - libxml2-utils
 
-# Set any variables we need
-variables:
-  # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
-  MYSQL_DATABASE: wp_test
-  MYSQL_ROOT_PASSWORD: mysql
-  WP_VERSION: latest
-  WP_MULTISITE: "0"
+node_js:
+    - stable
 
-stages:
-  - test
-  - build
-  - deploy
+env:
+    global:
+        - WP_MULTISITE=0
 
-# Run our tests
-test:
-  image: php:7.1.3
-  stage: test
-  script:
-  - echo "Installing WP tests"
-#  - bash bin/install-wp-tests.sh wp_test root mysql mysql $WP_VERSION true
-#  - echo "Running Code Quality Checks"
-#  - vendor/bin/phpcs public_html/custom-content/plugins/gpi --standard=phpcs.xml
-#  - vendor/bin/phpmd public_html/custom-content/plugins/gpi text phpmd-ruleset.xml
-#  - vendor/bin/phpcs public_html/custom-content/mu-plugins/gpi-plugin-loader.php --standard=phpcs.xml
-#  - vendor/bin/phpmd public_html/custom-content/mu-plugins/gpi-plugin-loader.php text phpmd-ruleset.xml
-#  - vendor/bin/phpcs public_html/custom-content/mu-plugins/gpi-plugin-loader --standard=phpcs.xml
-#  - vendor/bin/phpmd public_html/custom-content/mu-plugins/gpi-plugin-loader text phpmd-ruleset.xml
-#  - echo "Executing unit tests"
-#  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover --colors=never
-#  - echo "Building theme with Yarn"
-#  - cd public_html/custom-content/themes/gpi-theme
-#  - yarn test
-#  - yarn lint
-#  - cd ../../../..
+branches:
+    only:
+        - master
+        - develop
+        - /^release\/.*$/
 
-build_develop:
-  stage: build
-  script:
-  - echo "Building the theme"
-#  - cd public_html/custom-content/themes/gpi-theme
-#  - yarn test
-#  - yarn build
-  only:
-  - develop
+before_install:
+#    - WP_VERSION=$( cat ./config/wp-version )
+#    - echo "WP_VERSION=$WP_VERSION"
 
-deploy_develop:
-  stage: deploy
-  script:
-  - echo "Deploying develop branch to dev server"
-  - echo $(which rsync)
-  environment:
-    name: dev
-#    url: https://www.gpi-site.dev
-  only:
-  - develop
+install:
+#    - export DEV_LIB_PATH=dev-lib
+#    - if [ ! -e "$DEV_LIB_PATH" ] && [ -L .travis.yml ]; then export DEV_LIB_PATH=$( dirname $( readlink .travis.yml ) ); fi
+#    - if [ ! -e "$DEV_LIB_PATH" ]; then git clone https://github.com/xwp/wp-dev-lib.git $DEV_LIB_PATH; fi
+#    - source $DEV_LIB_PATH/travis.install.sh
+
+script:
+#    - source $DEV_LIB_PATH/travis.script.sh
+#    - if [ -e ./vendor/bin/phpmd ]; then ./vendor/bin/phpmd docroot/wp-content/plugins/beachbody-on-demand/src text docroot/wp-content/plugins/beachbody-on-demand/phpmd-ruleset.xml --exclude vendor --suffixes php; fi
+
+after_script:
+#    - source $DEV_LIB_PATH/travis.after_script.sh

@@ -12,6 +12,15 @@ Example of a WordPress Plugin that follows a TDD approach, includes the WordPres
 * Continuous Integration (TravisCI)
 * Continuous Deployment (host TBD)
 
+## Docker Compose
+Start Docker containers by running `$ docker-compose up --build`
+
+To open a shell on the "wp" container run `$ docker exec -it wp /bin/bash`
+
 ### Installing
 
-Install WP Unit Test Suite by running `$ sh bin/install-wp-tests.sh`
+Install WP Unit Test Suite by running `$ docker exec -it wp /bin/bash install-wp-tests.sh wordpress wordpress wordpress db`
+
+### Run PHPUnit
+
+`$ docker exec -it wp vendor/bin/phpunit`
