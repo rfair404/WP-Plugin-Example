@@ -1,0 +1,17 @@
+<phpunit
+        bootstrap="phpunit-bootstrap.php"
+        backupGlobals="false"
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+>
+    <testsuites>
+        <testsuite name="Plugin">
+            <directory prefix="test-" suffix=".php">path-to/tests/</directory>
+        </testsuite>
+        <testsuite name="MU-Plugin">
+            <directory prefix="test-" suffix=".php">path-to/tests/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

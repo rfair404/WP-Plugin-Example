@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress Coding Standards">
+    <description>PHP_CodeSniffer standards for WordPress Project.</description>
+
+    <rule ref="WordPress-Core" />
+    <rule ref="WordPress-Docs" />
+    <rule ref="WordPress-Extra" />
+    <rule ref="WordPress.WP.I18n" />
+    <arg name="extensions" value="php"/>
+    <arg value="s"/>
+
+    <rule ref="WordPress.Files.FileName.InvalidClassFileName">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="Generic.PHP.NoSilencedErrors.Discouraged">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="PEAR.NamingConventions.ValidClassName.StartWithCapital">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="Squiz.PHP.DisallowMultipleAssignments.Found">
+        <severity>0</severity>
+    </rule>
+
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/wp-*</exclude-pattern>
+
+</ruleset>
