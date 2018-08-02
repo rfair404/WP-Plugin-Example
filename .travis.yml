@@ -53,4 +53,4 @@ script:
 
 after_script:
 #    - source $DEV_LIB_PATH/travis.after_script.sh
-sftp -o Port=2222 $USER@$HOST
+#sftp -o Port=2222 $USER@$HOST
