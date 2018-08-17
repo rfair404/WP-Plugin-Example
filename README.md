@@ -51,7 +51,6 @@ Configure PHPCS to use WPCS  by running:
 docker exec -it wp vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs
 ```
 
-
 ### PHPCS
 
 Check the coding standards
