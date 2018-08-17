@@ -50,10 +50,14 @@ before_install:
   - sudo mv wp-cli.phar /usr/local/bin/wp
   - mysql -e 'CREATE DATABASE wordpress;'
   - /bin/bash custom-content/plugins/custom-plugin/bin/install-wp-tests.sh wordpress root
+  - wp core download
+  - wp config create --dbname=wordpress --dbuser=root
+  - wp core install --url="http://localhost" --title="WP Test Site" --admin_user=admin --admin_password=admin --admin_email=foo@bar.com --skip-email
+
 
 install:
-# install wp
   - echo which wp
+
 
 script:
 # script
