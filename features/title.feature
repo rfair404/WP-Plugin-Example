@@ -10,4 +10,4 @@ Feature: Title
     Given the title of the site is "WP Test Example"
     When I open the homepage
     Then I should see the title in the markup
-    And the title should be "WP Test Example"
+    And the title should be "WP Test Example - foo"

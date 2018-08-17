@@ -8,7 +8,7 @@
 >
     <testsuites>
         <testsuite name="Custom Plugin">
-            <directory prefix="test-" suffix=".php">custom-content/plugins/custom-plubin/tests/</directory>
+            <directory prefix="test-" suffix=".php">custom-content/plugins/custom-plugin/tests/</directory>
         </testsuite>
     </testsuites>
 </phpunit>

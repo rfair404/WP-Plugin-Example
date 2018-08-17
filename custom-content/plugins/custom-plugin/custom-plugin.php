@@ -13,3 +13,8 @@
  */
 
 // Your code starts here.
+add_filter( 'bloginfo', 'wppe_convert_title', 10, 1 );
+
+function wppe_convert_title( $output ) {
+    return sprintf( '%s - %s', $output,'foo' );
+}

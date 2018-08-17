@@ -63,7 +63,7 @@ class FeatureContext implements Context
         $page = $this->session->getPage();
         $title = $page->find( 'css', '.site-title' )->getText();
         if ( $arg1 !== $title ) {
-            throw new \Exception( 'Site title does not match expected ' . $arg1 );
+            throw new \Exception( sprintf( 'Site title (%s) does not match expected %s', $title, $arg1 ) );
         }
     }
 }
