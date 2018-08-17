@@ -18,11 +18,10 @@
  * @package WordPress
  */
 
-define('WP_SITEURL', 'http://localhost');
-define('WP_HOME', 'http://localhost/wp');
+define('WP_SITEURL', 'http://localhost/wp');
+define('WP_HOME', 'http://localhost');
 define('WP_CONTENT_DIR', __DIR__ . '/custom-content/' );
 define('WP_CONTENT_URL', 'http://localhost/custom-content/');
-
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
@@ -83,7 +82,7 @@ $table_prefix  = 'wp_';
  *
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
-define('WP_DEBUG', false);
+define('WP_DEBUG', true);
 
 /* That's all, stop editing! Happy blogging. */
 

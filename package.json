@@ -1,0 +1,24 @@
+{
+  "name": "wordpress-plugin-example",
+  "version": "1.0.0",
+  "description": "An example of WordPress plugin with testing goodness",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rfair404/WP-Plugin-Example.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rfair404/WP-Plugin-Example/issues"
+  },
+  "homepage": "https://github.com/rfair404/WP-Plugin-Example#readme",
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "stylelint": "^9.4.0",
+    "stylelint-config-wordpress": "^13.0.0"
+  }
+}

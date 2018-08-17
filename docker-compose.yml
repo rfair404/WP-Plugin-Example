@@ -31,14 +31,7 @@ services:
        WORDPRESS_DB_USER: wordpress
        WORDPRESS_DB_PASSWORD: wordpress
      volumes:
-       - ./vendor:/var/www/html/vendor/
-       - ./phpunit.xml.dist:/var/www/html/phpunit.xml.dist
-       - ./phpunit-bootstrap.php:/var/www/html/phpunit-bootstrap.php
-       - ./phpcs.xml:/var/www/html/phpcs.xml
-       - ./phpmd-ruleset.xml:/var/www/html/phpmd-ruleset.xml
-       - ./install-wp-tests.sh:/var/www/html/install-wp-tests.sh
-       - ./docroot/wp-config.php:/var/www/html/docroot/wp-config.php
-       - ./custom-content:/var/www/html/docroot/custom-content/
-
-
-
+       - ./:/var/www/html/
+       - ./config/wp-config.php:/var/www/html/wp-config.php
+       - ./config/index.php:/var/www/html/index.php
+       - ./custom-content:/var/www/html/custom-content/

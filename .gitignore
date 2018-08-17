@@ -1,6 +1,7 @@
 vendor/*
 wp/
 composer.lock
-docroot/custom-content
-
+wp-config.php
+index.php
+node_modules/
 .idea

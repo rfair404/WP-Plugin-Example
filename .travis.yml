@@ -16,13 +16,13 @@ php:
 matrix:
   fast_finish: true
   include:
-    # Run PHPCS against WPCS. I just picked to run it against 7.0.
-#    - php: 7.0
-#      env: PHPCS_BRANCH=master SNIFF=1
-#      addons:
-#        apt:
-#          packages:
-#            - libxml2-utils
+#     Run PHPCS against WPCS. I just picked to run it against 7.0.
+    - php: 7.0
+      env: PHPCS_BRANCH=master SNIFF=1
+      addons:
+        apt:
+          packages:
+            - libxml2-utils
 
 node_js:
     - stable
@@ -38,19 +38,14 @@ branches:
         - /^release\/.*$/
 
 before_install:
-#    - WP_VERSION=$( cat ./config/wp-version )
-#    - echo "WP_VERSION=$WP_VERSION"
+# set up
 
 install:
-#    - export DEV_LIB_PATH=dev-lib
-#    - if [ ! -e "$DEV_LIB_PATH" ] && [ -L .travis.yml ]; then export DEV_LIB_PATH=$( dirname $( readlink .travis.yml ) ); fi
-#    - if [ ! -e "$DEV_LIB_PATH" ]; then git clone https://github.com/xwp/wp-dev-lib.git $DEV_LIB_PATH; fi
-#    - source $DEV_LIB_PATH/travis.install.sh
+# install wp
+  - echo which wp
 
 script:
-#    - source $DEV_LIB_PATH/travis.script.sh
-#    - if [ -e ./vendor/bin/phpmd ]; then ./vendor/bin/phpmd docroot/wp-content/plugins/beachbody-on-demand/src text docroot/wp-content/plugins/beachbody-on-demand/phpmd-ruleset.xml --exclude vendor --suffixes php; fi
+# script
 
 after_script:
-#    - source $DEV_LIB_PATH/travis.after_script.sh
-sftp -o Port=2222 $USER@$HOST
+# deploy
