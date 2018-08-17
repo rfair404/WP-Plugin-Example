@@ -39,7 +39,7 @@ branches:
 
 before_install:
 # set up
-  - sh custom-content/plugins/custom-plugin/bin/install-wp-tests.sh wordpress_tests root somewordpress db latest
+  - /bin/bash custom-content/plugins/custom-plugin/bin/install-wp-tests.sh wordpress_tests root somewordpress db latest
 
 install:
 # install wp
