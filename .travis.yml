@@ -57,7 +57,7 @@ install:
   - composer install --no-interaction
 
 script:
-  -vendor/bin/phpunit
+  - vendor/bin/phpunit
 
 after_script:
 # deploy
