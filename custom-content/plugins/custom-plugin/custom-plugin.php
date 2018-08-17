@@ -15,6 +15,12 @@
 // Your code starts here.
 add_filter( 'bloginfo', 'wppe_convert_title', 10, 1 );
 
+/**
+ * Adds foo to the site title.
+ *
+ * @param $output string the incoming title.
+ * @return string the filtered title.
+ */
 function wppe_convert_title( $output ) {
-    return sprintf( '%s - %s', $output,'foo' );
+	return sprintf( '%s - %s', $output, 'foo' );
 }
