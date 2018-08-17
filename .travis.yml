@@ -4,7 +4,6 @@ cache:
   directories:
     - node_modules
     - vendor
-#    - $HOME/phpunit-bin
 
 language:
     - php
@@ -52,7 +51,7 @@ before_install:
   - wp core download
   - wp config create --dbname=wordpress --dbuser=root
   - wp core install --url="http://localhost" --title="WP Test Site" --admin_user=admin --admin_password=admin --admin_email=foo@bar.com --skip-email
-
+  - composer install --no-interaction
 
 install:
   - echo which wp
