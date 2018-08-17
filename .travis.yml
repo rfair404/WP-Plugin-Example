@@ -57,6 +57,9 @@ install:
   - composer install --no-interaction
 
 script:
+  - vendor/bin/phpcs custom-content/plugins/custom-plugin --standard=phpcs.xml
+  - vendor/bin/phpmd custom-content/plugins/custom-plugin text phpmd-ruleset.xml
+  - vendor/bin/behat
   - vendor/bin/phpunit
 
 after_script:
