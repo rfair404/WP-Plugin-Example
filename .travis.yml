@@ -13,6 +13,13 @@ language:
 php:
     - 7.0
 
+services:
+  - mysql
+
+addons:
+  hosts:
+    - localhost
+
 matrix:
   fast_finish: true
   include:
