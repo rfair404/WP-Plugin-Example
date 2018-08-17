@@ -47,18 +47,16 @@ before_install:
   - curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
   - chmod +x wp-cli.phar
   - sudo mv wp-cli.phar /usr/local/bin/wp
+
+install:
   - /bin/bash custom-content/plugins/custom-plugin/bin/install-wp-tests.sh wordpress root '' 127.0.0.1
   - wp core download
   - wp config create --dbname=wordpress --dbuser=root
   - wp core install --url="http://localhost" --title="WP Test Site" --admin_user=admin --admin_password=admin --admin_email=foo@bar.com --skip-email
   - composer install --no-interaction
 
-install:
-  - echo which wp
-
-
 script:
-# script
+  -vendor/bin/phpunit
 
 after_script:
 # deploy

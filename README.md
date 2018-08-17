@@ -40,12 +40,6 @@ Install WP Unit Test Suite by running
 docker exec -it wp /bin/bash custom-content/plugins/custom-plugin/bin/install-wp-tests.sh wordpress_tests root somewordpress db latest 
 ```
 
-If the test suite has been installed, and the test database created, run this instead
-
-```
-docker exec -it wp /bin/bash install-wp-tests.sh wordpress_tests root somewordpress db latest false
-```
-
 Configure PHPCS to use WPCS  by running:
 
 ```
@@ -85,5 +79,5 @@ docker exec -it wp vendor/bin/behat
 
 Run PHP Unit tests
 ```
-docker exec -it wp vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover --colors=never
+docker exec -it wp vendor/bin/phpunit 
 ```
