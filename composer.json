@@ -18,7 +18,7 @@
         "wpackagist-theme/twentyseventeen": "1.6"
     },
     "extra": {
-        "wordpress-install-dir": "docroot",
+        "wordpress-install-dir": "wp",
         "installer-paths": {
             "custom-content/plugins/{$name}/": ["type:wordpress-plugin"],
             "custom-content/themes/{$name}/": ["type:wordpress-theme"]
@@ -29,6 +29,10 @@
         "wp-coding-standards/wpcs": "^1.0",
         "squizlabs/php_codesniffer": "3.*",
         "phpmd/phpmd" : "@stable",
-        "10up/wp_mock": "0.3.0"
+        "10up/wp_mock": "0.3.0",
+        "behat/behat": "^3.5",
+        "behat/mink": "^1.7",
+        "behat/mink-goutte-driver": "^1.2",
+        "behat/mink-extension": "^2.3"
     }
 }

@@ -7,11 +7,8 @@
         convertWarningsToExceptions="true"
 >
     <testsuites>
-        <testsuite name="Plugin">
-            <directory prefix="test-" suffix=".php">path-to/tests/</directory>
-        </testsuite>
-        <testsuite name="MU-Plugin">
-            <directory prefix="test-" suffix=".php">path-to/tests/</directory>
+        <testsuite name="Custom Plugin">
+            <directory prefix="test-" suffix=".php">custom-content/plugins/custom-plugin/tests/</directory>
         </testsuite>
     </testsuites>
 </phpunit>

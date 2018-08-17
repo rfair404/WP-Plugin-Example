@@ -95,12 +95,12 @@ install_wp() {
 install_test_suite() {
 	# portable in-place argument for both GNU sed and Mac OSX sed
 	if [[ $(uname -s) == 'Darwin' ]]; then
-		local ioption='-i .bak'
+		local ioption='-i.bak'
 	else
 		local ioption='-i'
 	fi
 
-	#set up testing suite if it doesn't yet exist
+	# set up testing suite if it doesn't yet exist
 	if [ ! -d $WP_TESTS_DIR ]; then
 		# set up testing suite
 		mkdir -p $WP_TESTS_DIR

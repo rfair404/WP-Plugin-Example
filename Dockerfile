@@ -3,7 +3,7 @@ FROM alpine:3.7
 # Install packages
 RUN apk --no-cache add php7 php7-fpm php7-mysqli php7-json php7-openssl php7-tokenizer php7-curl \
     php7-zlib php7-xml php7-simplexml php7-xmlwriter php7-phar php7-intl php7-dom php7-xmlreader php7-ctype \
-    php7-mbstring php7-gd php7-bz2 nginx supervisor curl git mysql mysql-client bash subversion
+    php7-mbstring php7-gd php7-bz2 php7-xdebug nginx supervisor nodejs vim curl git mysql mysql-client bash subversion
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
@@ -16,12 +16,6 @@ COPY config/php.ini /etc/php7/conf.d/zzz_custom.ini
 
 # Configure supervisord
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-# Install xdebug
-#RUN yes | pecl install xdebug \
-#    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
-#    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-#    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
 
 # Install wpcli
 RUN set -ex; \
@@ -38,10 +32,14 @@ WORKDIR /var/www/html
 RUN set -ex; \
     composer install
 
-#COPY ./docroot/index.php /var/www/html/docroot/index.php
-COPY ./docroot/wp-config.php /var/www/html/docroot/wp-config.php
+COPY ./config/wp-config.php /var/www/html/wp-config.php
+COPY ./config/index.php /var/www/html/index.php
 
-COPY ./custom-content /var/www/html/docroot/custom-content
+
+COPY ./custom-content /var/www/html/custom-content
+
+RUN npm install -g eslint; \
+    npm install -g stylelint
 
 EXPOSE 80 443
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

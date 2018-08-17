@@ -4,7 +4,6 @@ cache:
   directories:
     - node_modules
     - vendor
-#    - $HOME/phpunit-bin
 
 language:
     - php
@@ -13,16 +12,23 @@ language:
 php:
     - 7.0
 
+services:
+  - mysql
+
+addons:
+  hosts:
+    - localhost
+
 matrix:
   fast_finish: true
   include:
-    # Run PHPCS against WPCS. I just picked to run it against 7.0.
-#    - php: 7.0
-#      env: PHPCS_BRANCH=master SNIFF=1
-#      addons:
-#        apt:
-#          packages:
-#            - libxml2-utils
+#     Run PHPCS against WPCS. I just picked to run it against 7.0.
+    - php: 7.0
+      env: PHPCS_BRANCH=master SNIFF=1
+      addons:
+        apt:
+          packages:
+            - libxml2-utils
 
 node_js:
     - stable
@@ -38,19 +44,28 @@ branches:
         - /^release\/.*$/
 
 before_install:
-#    - WP_VERSION=$( cat ./config/wp-version )
-#    - echo "WP_VERSION=$WP_VERSION"
+  - curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+  - chmod +x wp-cli.phar
+  - sudo mv wp-cli.phar /usr/local/bin/wp
+  - npm install
+  - npm install -g eslint
+  - npm install -g stylelint
 
 install:
-#    - export DEV_LIB_PATH=dev-lib
-#    - if [ ! -e "$DEV_LIB_PATH" ] && [ -L .travis.yml ]; then export DEV_LIB_PATH=$( dirname $( readlink .travis.yml ) ); fi
-#    - if [ ! -e "$DEV_LIB_PATH" ]; then git clone https://github.com/xwp/wp-dev-lib.git $DEV_LIB_PATH; fi
-#    - source $DEV_LIB_PATH/travis.install.sh
+  - /bin/bash custom-content/plugins/custom-plugin/bin/install-wp-tests.sh wordpress root '' 127.0.0.1
+  - wp core download
+  - wp config create --dbname=wordpress --dbuser=root
+  - wp core install --url="http://localhost" --title="WP Test Site" --admin_user=admin --admin_password=admin --admin_email=foo@bar.com --skip-email
+  - composer install --no-interaction
+  - vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs
 
 script:
-#    - source $DEV_LIB_PATH/travis.script.sh
-#    - if [ -e ./vendor/bin/phpmd ]; then ./vendor/bin/phpmd docroot/wp-content/plugins/beachbody-on-demand/src text docroot/wp-content/plugins/beachbody-on-demand/phpmd-ruleset.xml --exclude vendor --suffixes php; fi
+  - eslint custom-content/plugins/custom-plugin/js/
+  - stylelint custom-content/plugins/custom-plugin/css/
+  - vendor/bin/phpcs custom-content/plugins/custom-plugin --standard=phpcs.xml
+  - vendor/bin/phpmd custom-content/plugins/custom-plugin text phpmd-ruleset.xml
+  - vendor/bin/behat
+  - vendor/bin/phpunit
 
 after_script:
-#    - source $DEV_LIB_PATH/travis.after_script.sh
-sftp -o Port=2222 $USER@$HOST
+# deploy
