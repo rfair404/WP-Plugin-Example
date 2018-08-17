@@ -42,11 +42,13 @@ docker exec -it wp /bin/bash custom-content/plugins/custom-plugin/bin/install-wp
 ```
 
 If the test suite has been installed, and the test database created, run this instead:
+
 ```
 docker exec -it wp /bin/bash install-wp-tests.sh wordpress_tests root somewordpress db latest false
 ```
 
 Configure PHPCS to use WPCS  by running:
+
 ```
 docker exec -it wp vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs
 ```
@@ -54,6 +56,7 @@ docker exec -it wp vendor/bin/phpcs --config-set installed_paths vendor/wp-codin
 ### PHPCS
 
 Check the coding standards
+
 ```
 docker exec -it wp vendor/bin/phpcs custom-content/plugins/custom-plugin --standard=phpcs.xml
 ```
@@ -61,6 +64,7 @@ docker exec -it wp vendor/bin/phpcs custom-content/plugins/custom-plugin --stand
 ### PHPMD
 
 Cleanup with PHPMd
+
 ```
 docker exec -it wp vendor/bin/phpmd custom-content/plugins/custom-plugin text phpmd-ruleset.xml
 ```
