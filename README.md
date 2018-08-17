@@ -30,7 +30,6 @@ docker exec -it wp /bin/bash
 ### Install WordPress
 ```
 wp core install --url=http://localhost --title="WP Test Site" --admin_user=rfair404 --admin_email=rfair404@gmail.com
-
 ```
 
 ### Installing
@@ -41,7 +40,7 @@ Install WP Unit Test Suite by running
 docker exec -it wp /bin/bash custom-content/plugins/custom-plugin/bin/install-wp-tests.sh wordpress_tests root somewordpress db latest 
 ```
 
-If the test suite has been installed, and the test database created, run this instead:
+If the test suite has been installed, and the test database created, run this instead
 
 ```
 docker exec -it wp /bin/bash install-wp-tests.sh wordpress_tests root somewordpress db latest false
