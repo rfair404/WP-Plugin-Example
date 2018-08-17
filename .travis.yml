@@ -1,66 +1,65 @@
-sudo: true
+sudo: false
+dist: trusty
+
+language: php
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+branches:
+  only:
+    - master
 
 cache:
   directories:
-    - node_modules
-    - vendor
-#    - $HOME/phpunit-bin
-
-language:
-    - php
-    - node_js
-
-php:
-    - 7.0
+    - $HOME/.composer/cache
 
 matrix:
-  fast_finish: true
   include:
-#     Run PHPCS against WPCS. I just picked to run it against 7.0.
+    - php: 7.1
+      env: WP_VERSION=latest
     - php: 7.0
-      env: PHPCS_BRANCH=master SNIFF=1
-      addons:
-        apt:
-          packages:
-            - libxml2-utils
+      env: WP_VERSION=latest
+    - php: 5.6
+      env: WP_VERSION=4.4
+    - php: 5.6
+      env: WP_VERSION=latest
+    - php: 5.6
+      env: WP_VERSION=trunk
+    - php: 5.6
+      env: WP_TRAVISCI=phpcs
+    - php: 5.3
+      env: WP_VERSION=latest
+      dist: precise
 
-node_js:
-    - stable
-
-env:
-    global:
-        - WP_MULTISITE=0
-
-branches:
-    only:
-        - master
-        - develop
-        - /^release\/.*$/
-
-before_install:
-    - sudo apt-get update -yqq
-    - sudo apt-get install git -yqq
-    - sudo apt-get -yqqf install curl vim wget zip unzip rsync subversion gcc g++ make mysql-client libmcrypt-dev libmysqlclient-dev libpng-dev  --fix-missing
-    - curl -sL https://deb.nodesource.com/setup_8.x | bash
-    - curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-    - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-    - sudo apt-get update -yqq
-    - sudo apt-get -yqqf install nodejs yarn
-    # Install PHP extensions
-    - docker-php-ext-install mysqli pdo_mysql mbstring
-    # Install & enable Xdebug for code coverage reports
-    - pecl install xdebug
-    - docker-php-ext-enable mysqli pdo_mysql mbstring xdebug
-    # Install and run Composer
-    - curl -sS https://getcomposer.org/installer | php
-    - php composer.phar install
-    # Install WP Unit testing suite
-    - bash install-wp-tests.sh wp_test root mysql mysql latest true
-
-install:
-    - source install-wp-tests.sh
+before_script:
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - |
+    if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
+      phpenv config-rm xdebug.ini
+    else
+      echo "xdebug.ini does not exist"
+    fi
+  - |
+    if [[ ! -z "$WP_VERSION" ]] ; then
+      bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+      composer global require "phpunit/phpunit=4.8.*|5.7.*"
+    fi
+  - |
+    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+      composer global require wp-coding-standards/wpcs
+      phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
+    fi
 
 script:
-
-after_script:
-    - sftp -o Port=2222 $USER@$HOST
+  - |
+    if [[ ! -z "$WP_VERSION" ]] ; then
+      phpunit
+      WP_MULTISITE=1 phpunit
+    fi
+  - |
+    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+      phpcs
+    fi
