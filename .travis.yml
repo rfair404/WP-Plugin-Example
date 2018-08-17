@@ -45,8 +45,8 @@ branches:
         - /^release\/.*$/
 
 before_install:
-# set up
-  - /bin/bash custom-content/plugins/custom-plugin/bin/install-wp-tests.sh wordpress_tests root somewordpress db latest
+  - mysql -e 'CREATE DATABASE wordpress;'
+  - /bin/bash custom-content/plugins/custom-plugin/bin/install-wp-tests.sh wordpress root
 
 install:
 # install wp
