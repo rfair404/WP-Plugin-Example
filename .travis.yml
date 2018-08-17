@@ -58,6 +58,8 @@ install:
   - vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs
 
 script:
+  - eslint custom-content/plugins/custom-plugin/js/
+  - stylelint custom-content/plugins/custom-plugin/css/
   - vendor/bin/phpcs custom-content/plugins/custom-plugin --standard=phpcs.xml
   - vendor/bin/phpmd custom-content/plugins/custom-plugin text phpmd-ruleset.xml
   - vendor/bin/behat
