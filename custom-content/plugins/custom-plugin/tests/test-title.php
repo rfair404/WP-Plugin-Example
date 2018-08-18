@@ -23,4 +23,5 @@ class TitleTest extends WP_UnitTestCase {
 	    \update_option('blogname', $title );
 	    $this->assertEquals( sprintf( '%s - %s', $title, 'foo' ), apply_filters( 'bloginfo', get_option( 'blogname' ) ) );
     }
+
 }

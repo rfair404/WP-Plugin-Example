@@ -67,5 +67,14 @@ script:
   - vendor/bin/behat
   - vendor/bin/phpunit
 
-after_script:
-# deploy
+deploy:
+  - provider: script
+    script:  config/deploy.sh $PRODUCTION_USER $PRODUCTION_HOST $PRODUCTION_PATH $PRODUCTION_KEY
+    skip_cleanup: true
+    on:
+      branch: develop
+  - provider: script
+    script:  bash config/deploy.sh $STAGING_USER $STAGING_HOST $STAGING_PATH $STAGING_KEY
+    skip_cleanup: true
+    on:
+      branch: master

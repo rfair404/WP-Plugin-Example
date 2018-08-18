@@ -66,4 +66,14 @@ class FeatureContext implements Context
             throw new \Exception( sprintf( 'Site title (%s) does not match expected %s', $title, $arg1 ) );
         }
     }
+
+    /**
+     * @When I open the \/wp-admin
+     */
+    public function iOpenTheWpAdmin()
+    {
+
+        $this->session = new \Behat\Mink\Session($driver);
+        $this->session->visit('http://localhost/wp-admin');
+    }
 }
